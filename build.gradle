@@ -12,7 +12,7 @@ allprojects {
 }
 jar {
     manifest {
-        attributes "Main-Class": "net.christophschubert.kafka.clusterstate.CLI"
+        attributes "Main-Class": "net.christophschubert.kafka.clusterstate.cli.CLI"
     }
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
