@@ -1,24 +1,23 @@
 plugins {
     id 'java'
 }
-
 group 'net.christophschubert'
 version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.11
-
-
-
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    group 'net.christophschubert'
+    version '1.0-SNAPSHOT'
+}
 jar {
     manifest {
-        attributes "Main-Class": "net.christophschubert.kafka.clusterstate.cli.CLI"
+        attributes "Main-Class": "net.christophschubert.kafka.clusterstate.CLI"
     }
-
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
 repositories {
     mavenCentral()
     maven {
@@ -27,30 +26,19 @@ repositories {
     maven { //necessary for JSON schema dependency
         url 'https://jitpack.io'
     }
-
-
 }
-
 dependencies {
-
     testCompile group: 'junit', name: 'junit', version: '4.12'
-
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
     compile group: 'info.picocli', name: 'picocli', version: '4.5.1'
-
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
-
     compile group: 'io.confluent', name: 'kafka-avro-serializer', version: '6.0.0'
     compile group: 'io.confluent', name: 'kafka-protobuf-serializer', version: '6.0.0'
     compile group: 'io.confluent', name: 'kafka-json-schema-serializer', version: '6.0.0'
-
-
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.0'
     testCompile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.0'
-
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.3'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
-
 }
